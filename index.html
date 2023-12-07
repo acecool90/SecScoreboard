@@ -4,24 +4,103 @@
   <meta charset="UTF-8">
   <title>SEC Scoreboard</title>
   <style>
-    .game-details {
+
+    
+
+body {
+  background-color: #9de0ca; 
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.game-details {
       margin: 20px;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
-      background-color: #f0f0f0;
+      background-color: tan;
+      border-color: rgb(0, 30, 255);
+      border-width: 10px;
+     
     }
-    .team-header {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
+
+    @font-face {
+  font-family: 'football';
+  src: url('/fonts/atlanta-college-font/AtlantaCollegeRegular-1Gva2.ttf')
+}
+
+.team-container {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+h1{
+  font-family: 'football', Arial, sans-serif;
+  font-size: 100px;
+  font-weight: 300;
+}
+
+
+
+.team-header {
+  font-size: 3.5em;
+  margin-bottom: 10px;
+}
+
+
+.game-details {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+
+.game-details h1,
+.game-details h2 {
+  margin-bottom: 5px;
+  font-size: 2.2em;
+}
+
+
+.game-details p {
+  margin-bottom: 3px;
+  font-size: larger;
+}
+
+.loader {
+      border: 5px solid #f3f3f3; 
+      border-top: 5px solid #3498db; 
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite; 
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+}
+ @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+}
   </style>
 </head>
 <body>
 
   <h1>SEC Scoreboard 2023!</h1>
+  <br>
+  <br>
+  <img src="img/sec Medium.jpeg" alt="Teams">
+  <br>
+  <br>
+
 
   <label for="weekSelect">Select Week:</label>
+
+  
   <select id="weekSelect">
     <option value="1">Week 1</option>
     <option value="2">Week 2</option>
@@ -36,8 +115,18 @@
     <option value="11">Week 11</option>
     <option value="12">Week 12</option>
   </select>
+  <br>
+  <br>
+
+  <div class="loader" id="loader"></div>
+  <br>
+  <br>
 
   <div id="teamGameDetails"></div>
+
+  <br>
+  <br>
+
 
   <script src="secScoreboard.js"></script>
 </body>

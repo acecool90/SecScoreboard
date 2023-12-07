@@ -1,17 +1,27 @@
-async function fetchDataForTeamAndWeek(team, week) {
-    try {
-      const encodedTeam = encodeURIComponent(team); 
-      const response = await fetch(`http://localhost:3008/api/games?team=${encodedTeam}&week=${week}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return null;
+async function fetchDataForTeamAndWeek(team, week, callback) {
+  try {
+    showLoader();
+    const encodedTeam = encodeURIComponent(team);
+    const response = await fetch(`http://localhost:3008/api/games?team=${encodedTeam}&week=${week}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+    const data = await response.json();
+    callback(data); // Call the callback function with the fetched data
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  } finally {
+    hideLoader(); // Hide the loader once the fetch operation completes (success or failure)
   }
+}
+
+  function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+  }
+  function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+  }
+
   
   function formatDate(iso8601String) {
     const date = new Date(iso8601String);
@@ -41,8 +51,10 @@ async function fetchDataForTeamAndWeek(team, week) {
     const teamData = {};
   
     for (const team of teams) {
-      const data = await fetchDataForTeamAndWeek(team, week);
-      teamData[team] = data;
+      fetchDataForTeamAndWeek(team, week, data => {
+        teamData[team] = data;
+        displayGameDataForAllTeams(teamData);
+      });
     }
   
     return teamData;
