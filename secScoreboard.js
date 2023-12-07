@@ -1,7 +1,7 @@
 async function fetchDataForTeamAndWeek(team, week) {
     try {
       const encodedTeam = encodeURIComponent(team); 
-      const response = await fetch(`http://sec-scoreboard.vercel.app:3008/api/games?team=${encodedTeam}&week=${week}`);
+      const response = await fetch(`http://localhost:3008/api/games?team=${encodedTeam}&week=${week}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
